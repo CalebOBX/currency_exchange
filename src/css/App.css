@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+}
+
+nav {
+  padding: 2em;
+}
+
+nav h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
