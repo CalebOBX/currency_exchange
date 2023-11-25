@@ -13,14 +13,20 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <nav>
+      <>
+        <header>
           <h1>Another Currency Converter App</h1>
-        </nav>
-        <BrowserRouter>
-          <Home />  
-        </BrowserRouter>
-      </div>
+          <p>Convert between 33 different currencies adjusting the base and amount.</p>
+        </header>
+        <div id='main'>
+          <BrowserRouter>
+            <Home />  
+          </BrowserRouter>
+        </div>
+        <footer>
+          <p>Created using the <a href='https://www.frankfurter.app/'>Frankfurter API</a>.</p>
+        </footer>
+      </>
     );
   }
 }
