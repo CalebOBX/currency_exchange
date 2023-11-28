@@ -63,13 +63,13 @@ nav ul li {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-h2, h3 {
-  font-size: 3rem;
+h2 {
+  font-size: 2.5rem;
   border-bottom: 2px solid #111;
-  padding: 2vh 10vw;
+  padding: 2vh 1vw;
 }
 
 .box {
@@ -124,4 +124,40 @@ footer {
   border-top: 2px solid #111;
   text-align: center;
   width: 100%;
+}
+
+footer p {
+  padding: 1vh 1vw;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  header p {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+
+  .box {
+    width: 100%;
+    border-left: none;
+    border-right: none;
+  }
+
+  .box input, .box form select {
+    width: 25%;
+  }
+
+  #convertedTable td {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  h2 {
+    font-size: 2rem;
+  }
 }

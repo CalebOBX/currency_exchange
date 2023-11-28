@@ -5,7 +5,7 @@ const Layout = (props) => {
     <>
       <header>
         <h1>Another Currency Converter App</h1>
-        <p>Convert between 33 different currencies adjusting the base and amount.</p>
+        <p>Generate a list of currency conversions or convert between pairs.</p>
       </header>
       <nav>
         <ul>
@@ -17,10 +17,12 @@ const Layout = (props) => {
           </li>
         </ul>
       </nav>
-      <Outlet />
+      <div id='main'>
+        <Outlet />
+      </div>
       <footer>
         <p>Created using the <a href='https://www.frankfurter.app/'>Frankfurter API</a>.</p>
-        <p><a href='https://github.com/SkoomaKing'>calebburrus</a></p>
+        <p><a href='https://github.com/SkoomaKing/currency_exchange'>view on github</a></p>
       </footer>
     </>
   )
