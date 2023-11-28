@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { checkStatus, json } from '../utils/utils';
 import currencies from '../utils/currencies'
-import BaseCurrency from '../components/BaseCurrency';
+import CurrencyList from '../components/CurrencyList';
 import ConvertedTable from '../components/ConvertedTable';
 
 class Home extends Component {
@@ -47,7 +47,7 @@ class Home extends Component {
         const currencyRates = Object.keys(data.rates)
           .map((ratesEntry, i) => ({
             rate: data.rates[ratesEntry],
-            name: currencies[i]
+            abr: currencies[i],
           }))
         this.setState({ rates: currencyRates, loading: false })
       })
@@ -60,22 +60,22 @@ class Home extends Component {
     const { currencies, currency, amount, rates, loading } = this.state;
     return (
       <>
-        <div id='baseCurrency'>
+        <div id='baseCurrency' className='box'>
           <h2>Base Currency</h2>
           <form>
-            <select className='base-currency-form' value={currency} onChange={this.changeCurrency} disabled={loading}>
-              <BaseCurrency currencies={currencies} currency={currency} />
+            <select value={currency} onChange={this.changeCurrency} disabled={loading}>
+              <CurrencyList currencies={currencies} currency={currency} />
             </select>
           </form>
         </div>
 
-        <div id='baseAmount'>
+        <div id='baseAmount' className='box'>
           <h2>Base Amount</h2>
           <input type='number' value={amount} onChange={this.changeAmount} min='0' disabled={loading} />
         </div>
         
-        <div id='convertedTable'>
-          <ConvertedTable rates={rates} />
+        <div id='convertedTable' className='box'>
+          <ConvertedTable rates={rates} base={currency} />
         </div>
       </>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BaseCurrency = (props) => {
+const CurrencyList = (props) => {
     const { currencies, currency } = props;
     return(
       <>
@@ -16,4 +16,4 @@ const BaseCurrency = (props) => {
     );
 }
 
-export default BaseCurrency;
+export default CurrencyList;
