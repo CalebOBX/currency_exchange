@@ -48,7 +48,7 @@ class ConversionList extends Component {
 
   getRates = (currency, amount) => {
     this.setState({ loading: true });
-    fetch(`http://api.frankfurter.app/latest?amount=${amount}&from=${currency}`)
+    fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${currency}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
