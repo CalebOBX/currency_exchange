@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const ConvertedTable = (props) => {
   const { rates, base } = props;
@@ -19,7 +18,7 @@ const ConvertedTable = (props) => {
               return(
                 <tr key={currency.abr}>
                   <td>{currency.abr}</td>
-                  <td><Link to={`/conversion-swapper?from=${currency.abr}&to=${base}`}>{currency.rate}</Link></td>
+                  <td>{currency.rate}</td>
                 </tr>
               )
             })

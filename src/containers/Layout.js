@@ -22,7 +22,7 @@ const Layout = (props) => {
       </div>
       <footer>
         <p>Created using the <a href='https://www.frankfurter.app/'>Frankfurter API</a>.</p>
-        <p><a href='https://github.com/SkoomaKing/currency_exchange'>view on github</a></p>
+        <p>View on <a href='https://github.com/SkoomaKing/currency_exchange'>GitHub</a>.</p>
       </footer>
     </>
   )

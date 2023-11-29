@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
+import ConversionList from './ConversionList';
 import Layout from './Layout';
 import ConversionSwapper from './ConversionSwapper'
 import '../css/App.css';
@@ -10,8 +10,8 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='conversion-swapper' element={<ConversionSwapper />} />
+          <Route index element={<ConversionList />} />
+          <Route path='/conversion-swapper' element={<ConversionSwapper />} />
         </Route>
       </Routes>
     </BrowserRouter>

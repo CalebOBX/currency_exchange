@@ -4,7 +4,7 @@ import currencies from '../utils/currencies'
 import CurrencyList from '../components/CurrencyList';
 import ConvertedTable from '../components/ConvertedTable';
 
-class Home extends Component {
+class ConversionList extends Component {
   constructor() {
     super();
     this.state = {
@@ -82,4 +82,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default ConversionList;
