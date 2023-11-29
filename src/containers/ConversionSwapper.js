@@ -74,11 +74,19 @@ class ConversionSwapper extends Component {
   }
 
   changeBaseAmount = (event) => {
-    const altAmount = this.convert(event.target.value, this.state.rate, this.toAlt)
-    this.setState({
-      baseAmount: event.target.value,
-      altAmount
-    })
+    if (event.target.value > 0 && isNaN(event.target.value) === false) {  
+      const altAmount = this.convert(event.target.value, this.state.rate, this.toAlt)    
+      this.setState({
+        baseAmount: event.target.value,
+        altAmount
+      })
+    }
+    else {
+      this.setState({
+        baseAmount: 0,
+        altAmount: 0
+      })
+    }
   }
 
   changeAltCurrency = (event) => {
@@ -90,11 +98,24 @@ class ConversionSwapper extends Component {
   }
 
   changeAltAmount = (event) => {
-    const baseAmount = this.convert(event.target.value, this.state.rate, this.toBase)
-    this.setState({ 
-      altAmount: event.target.value,
-      baseAmount
-     });
+    if (event.target.value > 0 && isNaN(event.target.value) === false) {  
+      const baseAmount = this.convert(event.target.value, this.state.rate, this.toBase)
+      this.setState({ 
+        altAmount: event.target.value,
+        baseAmount
+      });
+    }
+    else {
+      this.setState({
+        baseAmount: 0,
+        altAmount: 0
+      })
+    }
+  }
+
+  clearForm = (event) => {
+    document.getElementById('baseInput').value = ''
+    document.getElementById('altInput').value = ''
   }
 
   render() {
@@ -108,7 +129,7 @@ class ConversionSwapper extends Component {
               <CurrencyList currencies={currencies} currency={baseCurrency} />
             </select>
           </form>
-          <input type='number' value={baseAmount} onChange={this.changeBaseAmount} min='0' disabled={loading} />
+          <input id='baseInput' type='number' value={baseAmount} onClick={this.clearForm} onChange={this.changeBaseAmount} min='0' disabled={loading} />
         </div>
         
         <div id='convertedSwapBox' className='box'>
@@ -118,7 +139,7 @@ class ConversionSwapper extends Component {
               <CurrencyList currencies={currencies} currency={altCurrency} />
             </select>
           </form>
-          <input type='number' value={altAmount} onChange={this.changeAltAmount} min='0' disabled={loading} />
+          <input id='altInput' type='number' value={altAmount} onClick={this.clearForm} onChange={this.changeAltAmount} min='0' disabled={loading} />
         </div>     
       </>
     )

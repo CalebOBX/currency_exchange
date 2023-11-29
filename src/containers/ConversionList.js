@@ -31,8 +31,19 @@ class ConversionList extends Component {
   }
 
   changeAmount = (event) => {
-    this.setState({ amount: event.target.value })
-    this.getRates(this.state.currency, event.target.value)
+    if (event.target.value > 0 && isNaN(event.target.value) === false) {
+      this.setState({ amount: event.target.value })
+      this.getRates(this.state.currency, event.target.value)
+    }
+    else {
+      this.setState({ amount: 1 })
+      this.getRates(this.state.currency, 1)
+      document.getElementById('baseAmountInput').value = this.amount;
+    }
+  }
+
+  clearForm = (event) => {
+    document.getElementById('baseAmountInput').value = '';
   }
 
   getRates = (currency, amount) => {
@@ -71,7 +82,7 @@ class ConversionList extends Component {
 
         <div id='baseAmount' className='box'>
           <h2>Base Amount</h2>
-          <input type='number' value={amount} onChange={this.changeAmount} min='0' disabled={loading} />
+          <input id='baseAmountInput' type='number' value={amount} onClick={this.clearForm} onChange={this.changeAmount} min='0' disabled={loading} />
         </div>
         
         <div id='convertedTable' className='box'>

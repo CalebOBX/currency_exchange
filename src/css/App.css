@@ -24,7 +24,7 @@ header {
 
 header h1, header p {
   color: #333;
-  padding: 1rem;
+  padding: .5rem 1rem;
 }
 
 header h1 {
@@ -33,7 +33,7 @@ header h1 {
 }
 
 header p {
-  font-size: 1.5em;
+  font-size: 1rem;
 }
 
 nav, nav ul {
@@ -44,12 +44,12 @@ nav, nav ul {
 }
 
 nav ul li {
+  font-size: 1.5rem;
   padding: 1rem;
 }
 
 .react-link {
   color: #333;
-  font-size: 1.5rem;
   font-weight: 500;
   text-decoration: underline dotted;
 }
@@ -81,10 +81,15 @@ h2 {
   box-shadow: #333 .5rem .5rem;
 }
 
-.box input, .box form select {
+.box input, .box form select, .box option {
   padding: 1.5rem;
   margin: 1.5rem;
-  width: 15%;
+  width: 25%;
+  text-align: center;
+}
+
+.box input:hover {
+  border: 2px solid #111;
 }
 
 #convertedTable table {
@@ -130,6 +135,7 @@ footer p {
   padding: 1vh 1vw;
 }
 
+
 @media (max-width: 1200px) {
   h2 {
     font-size: 2rem;
@@ -146,7 +152,6 @@ footer p {
   }
   
   header p {
-    font-size: 1.5rem;
     line-height: 1.5rem;
   }
 
@@ -154,12 +159,13 @@ footer p {
     width: 100%;
     border-left: none;
     border-right: none;
+    box-shadow: 0 .1rem .2rem;
   }
 
   .box input, .box form select {
     padding: 1rem;
     margin: 1rem;
-    width: 25%;
+    /* width: 25%; */
   }
 
   .react-link {
@@ -169,5 +175,8 @@ footer p {
   #convertedTable td {
     font-size: 1.25rem;
   }
-}
 
+  footer {
+    font-size: .8rem;
+  }
+}
