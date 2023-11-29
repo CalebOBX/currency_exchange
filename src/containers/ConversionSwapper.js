@@ -29,7 +29,7 @@ class ConversionSwapper extends Component {
 
   getRates(base, alt) {
     this.setState({ loading: true });
-    fetch(`http://api.frankfurter.app/latest?from=${base}&to=${alt}`)
+    fetch(`https://api.frankfurter.app/latest?from=${base}&to=${alt}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
