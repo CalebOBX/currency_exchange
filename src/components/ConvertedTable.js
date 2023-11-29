@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ConvertedTable = (props) => {
-  const { rates, base } = props;
+  const { rates } = props;
   return(
     <>
       <h3>Conversion</h3>
@@ -14,14 +14,15 @@ const ConvertedTable = (props) => {
         </thead>
         <tbody>
           {
-            rates.map(currency => {
-              return(
-                <tr key={currency.abr}>
-                  <td>{currency.abr}</td>
-                  <td>{currency.rate}</td>
-                </tr>
-              )
-            })
+            rates
+              .map(currency => {
+                return(
+                  <tr key={currency.abr}>
+                    <td>{currency.abr}</td>
+                    <td>{currency.rate}</td>
+                  </tr>
+                )
+              })
           }
         </tbody>
       </table>

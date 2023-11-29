@@ -55,11 +55,19 @@ class ConversionList extends Component {
         if (data.error) {
           throw new Error(data.error);
         }
+
+        const keys = [];
+        for (let key in data.rates) {
+          if (data.rates.hasOwnProperty(key)) keys.push(key);
+        }
+
         const currencyRates = Object.keys(data.rates)
+          .filter(abrv => abrv !== currency)
           .map((ratesEntry, i) => ({
             rate: data.rates[ratesEntry],
-            abr: currencies[i],
+            abr: keys[i],
           }))
+          
         this.setState({ rates: currencyRates, loading: false })
       })
       .catch((error) => {
