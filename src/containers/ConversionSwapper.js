@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Chart from 'chart.js/auto';
 import { checkStatus, json } from '../utils/utils';
 import currencies from '../utils/currencies'
 import CurrencyList from '../components/CurrencyList';
@@ -15,12 +16,15 @@ class ConversionSwapper extends Component {
       rate: 0,
       loading: false
     }
+
+    this.chartRef = React.createRef();
   }
 
   componentDidMount() {
     const { baseCurrency, altCurrency } = this.state;
     this.setCurrencies(this.state.currencies);
     this.getRates(baseCurrency, altCurrency)
+    this.getHistoricalRates(baseCurrency, altCurrency);
   }
 
   setCurrencies() {
@@ -49,6 +53,52 @@ class ConversionSwapper extends Component {
       })
   }
 
+  getHistoricalRates = (base, alt) => {
+    const endDate = new Date().toISOString().split('T')[0];
+    const startDate = new Date((new Date).getTime() - (30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+
+    fetch(`https://api.frankfurter.app/${startDate}..${endDate}?from=${base}&to=${alt}`)
+      .then(checkStatus)
+      .then(json)
+      .then(data => {
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        const chartLabels = Object.keys(data.rates);
+        const chartData = Object.values(data.rates).map(rate => rate[alt]);
+        const chartLabel = `${base}/${alt}`;
+        this.buildChart(chartLabels, chartData, chartLabel);
+      })
+      .catch(error => console.error(error.message));
+  }
+  
+  buildChart = (labels, data, label) => {
+
+    const chartRef = this.chartRef.current.getContext("2d");
+
+    if (typeof this.chart !== "undefined") {
+      this.chart.destroy();
+    }
+
+    this.chart = new Chart(this.chartRef.current.getContext("2d"), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: label,
+            data,
+            fill: false,
+            tension: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+      }
+    })
+  }
+
   toBase(amount, rate) {
     return amount * (1 / rate);
   }
@@ -70,6 +120,7 @@ class ConversionSwapper extends Component {
     if (baseCurrency !== this.state.altCurrency) {
       this.setState({ baseCurrency });
       this.getRates(baseCurrency, this.state.altCurrency);
+      this.getHistoricalRates(baseCurrency, this.state.altCurrency);
     }
   }
 
@@ -94,6 +145,7 @@ class ConversionSwapper extends Component {
     if (altCurrency !== this.state.baseCurrency) {
       this.setState({ altCurrency });
       this.getRates(this.state.baseCurrency, altCurrency);
+      this.getHistoricalRates(this.state.baseCurrency, altCurrency);
     }
   }
 
@@ -140,7 +192,11 @@ class ConversionSwapper extends Component {
             </select>
           </form>
           <input id='altInput' type='number' value={altAmount} onClick={this.clearForm} onChange={this.changeAltAmount} min='0' disabled={loading} />
-        </div>     
+        </div>
+
+        <div className='box'>
+          <canvas ref={this.chartRef} />
+        </div>  
       </>
     )
   }
